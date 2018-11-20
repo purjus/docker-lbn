@@ -66,16 +66,4 @@ COPY php.ini /usr/local/etc/php/php.ini
 RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative \
     && composer clear-cache
 
-## Node
-#RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-#    && apt-get install -y --force-yes -q --no-install-recommends nodejs \
-#    && rm -rf /var/lib/apt/lists/*
-#
-## Yarn
-#RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-#    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-#    && apt-get update -qq && apt-get install -y --force-yes -q --no-install-recommends yarn \
-#    && rm -rf /var/lib/apt/lists/*
-
-
 CMD ["php-fpm"]
