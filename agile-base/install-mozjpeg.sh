@@ -1,19 +1,23 @@
 #!/bin/sh
 set -e
 
+VERSION=3.3.1
+
+cd /tmp
+
 apt-get update
-apt-get install -y --force-yes --no-install-recommends autoconf automake libtool nasm make pkg-config
+apt-get --yes install automake libtool nasm # autoconf make
 rm -rf /var/lib/apt/lists/*
 
-cd $(mktemp -d)
-
-wget https://github.com/mozilla/mozjpeg/archive/master.zip
-unzip master.zip
-cd mozjpeg-master
-
+wget https://github.com/mozilla/mozjpeg/archive/v${VERSION}.tar.gz
+tar -xvf v${VERSION}.tar.gz
+cd mozjpeg-${VERSION}/
 autoreconf -fiv
-./configure
-make
+mkdir build && cd build
+sh ../configure
 make install
+ln -s /opt/libmozjpeg/bin/jpegtran /usr/local/bin/mozjpeg
 
-ln -s /opt/mozjpeg/bin/jpegtran /usr/bin/mozjpeg
+cd /tmp
+rm -Rf v${VERSION}.tar.gz mozjpeg-${VERSION}
+apt-get remove --yes automake autotools-dev libtool nasm 
