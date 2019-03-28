@@ -48,11 +48,6 @@ RUN apt-get update -qq && apt-get install -qq --no-install-recommends \
          git unzip wget ssh pngquant mysql-client gnupg2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Compile & install wget
-#COPY install-wget.sh /usr/local/bin/docker-app-install-wget
-#RUN chmod +x /usr/local/bin/docker-app-install-wget
-#RUN docker-app-install-wget
-
 # Compile & install mozjpeg
 COPY install-mozjpeg.sh /usr/local/bin/docker-app-install-mozjpeg
 RUN chmod +x /usr/local/bin/docker-app-install-mozjpeg
@@ -64,7 +59,7 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
-COPY php.ini /usr/local/etc/php/php.ini
+COPY lbn_aws.ini /usr/local/etc/php/conf.d/lbn_aws.ini
 
 # Node
 RUN curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
