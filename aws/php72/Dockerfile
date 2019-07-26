@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.2.19-fpm-stretch
 LABEL maintainer="technique+docker@purjus.fr"
 
 ARG APCU_VERSION=5.1.17
