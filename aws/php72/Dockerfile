@@ -56,6 +56,7 @@ RUN docker-app-install-mozjpeg
 # Composer
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_MEMORY_LIMIT -1
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
