@@ -13,12 +13,14 @@ RUN buildDeps=" \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
+        libxslt-dev \
     " \
     && apt-get update -qq && apt-get install -qq --no-install-recommends \
         $buildDeps \
         libicu57 \
         zlib1g \
         libzip4 \
+        libxslt1.1 \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) \
@@ -26,6 +28,7 @@ RUN buildDeps=" \
         pdo_mysql \
         zip \
         gd \
+        xsl \
     && pecl install \
         apcu-${APCU_VERSION} \
     && docker-php-ext-enable --ini-name 20-apcu.ini apcu \
