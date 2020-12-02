@@ -2,7 +2,7 @@ FROM php:7.2.19-fpm-stretch
 LABEL maintainer="technique+docker@purjus.fr"
 
 ARG APCU_VERSION=5.1.17
-ARG NODE_VERSION=11
+ARG NODE_VERSION=14
 
 
 # PHP extensions
