@@ -58,11 +58,11 @@ COPY install-mozjpeg.sh /usr/local/bin/docker-app-install-mozjpeg
 RUN chmod +x /usr/local/bin/docker-app-install-mozjpeg
 RUN docker-app-install-mozjpeg
 
+COPY lbn_aws.ini /usr/local/etc/php/conf.d/lbn_aws.ini
+
 # Composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_MEMORY_LIMIT -1
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
-
-COPY lbn_aws.ini /usr/local/etc/php/conf.d/lbn_aws.ini
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 CMD ["php-fpm"]
